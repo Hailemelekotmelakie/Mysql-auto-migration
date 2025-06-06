@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "migrate": "node ./migrations/migrate.js",
-    "drop": "node ./migrations/drop.js"
+    "scaffold": "node sql/scaffold.js",
+    "flush": "node sql/scaffold.js --flush",
+    "flush-only": "node sql/scaffold.js --flush-only",
+    "create-only": "node sql/scaffold.js --create-only",
+    "seed-only": "node sql/scaffold.js --seed-only"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "mysql": "^2.18.1"
+    "mysql2": "^3.14.1"
   },
   "devDependencies": {
     "dotenv": "^16.1.4"

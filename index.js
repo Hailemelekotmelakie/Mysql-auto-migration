@@ -1,24 +1,33 @@
+// app.js
 const express = require("express");
-const map = require("./map");
-const { DBConnection, connection } = require("./connection");
+const db = require("./db");
 
 const app = express();
 
-DBConnection();
-
-app.get("/", (req, res, next) => {
-  connection.query("SELECT * from user", (err, result) => {
-    console.log(result);
-    res.send(map(result));
-  });
-});
-app.get("/m", (req, res, next) => {
-  connection.query("SELECT * from user", (err, result) => {
-    res.send(result);
-  });
+// GET /users
+app.get("/", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM user");
+    res.json(rows);
+  } catch (err) {
+    console.error("DB error:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-app.listen(3000, () => console.log("Running on port http://localhost:3000"));
+// GET /raw-users (optional second route)
+app.get("/m", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT * FROM user");
+    res.send(rows); // raw format
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+app.listen(3000, () => {
+  console.log("🚀 Server running at http://localhost:3000");
+});
 
 // For further inquiry
 //  Hailemelekotmelakie1991@gmail.com
