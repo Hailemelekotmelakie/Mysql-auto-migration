@@ -1,8 +1,24 @@
 // app.js
+
 const express = require("express");
 const db = require("./db");
+const authRoutes = require("./auth");
+const passport = require("passport");
+const session = require("express-session");
+require("./passport-config");
 
 const app = express();
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your_fallback_secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+// Use the auth routes
+app.use("/auth", authRoutes);
 
 // GET /users
 app.get("/", async (req, res) => {
