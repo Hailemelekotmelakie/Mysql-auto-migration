@@ -17,7 +17,7 @@ async function testConnection() {
     conn.release();
   } catch (err) {
     console.error("❌ Database connection failed:", err.message);
-    process.exit(1); // optional: stop the server if DB is down
+    // process.exit(1); // optional: stop the server if DB is down
   }
 }
 

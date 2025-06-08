@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Login Success</title>
+  </head>
+  <body>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+
+      if (token && window.opener) {
+        window.opener.postMessage({ token }, "http://localhost:5173");
+        window.close();
+      }
+    </script>
+  </body>
+</html>

@@ -23,7 +23,7 @@ router.get(
       { expiresIn: "1h" }
     );
 
-    res.redirect(`http://localhost:5173/dashboard?token=${token}`);
+    res.redirect(`http://localhost:3000/popup-success.html?token=${token}`);
   }
 );
 

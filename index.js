@@ -5,9 +5,11 @@ const db = require("./db");
 const authRoutes = require("./auth");
 const passport = require("passport");
 const session = require("express-session");
+const path = require("path");
 require("./passport-config");
 
 const app = express();
+app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "your_fallback_secret",
